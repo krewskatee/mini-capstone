@@ -1,0 +1,12 @@
+<center><h1>Order made</h1></center>
+<center><h2>Bought By: <%= @order.user.name %></h2></center>
+
+<% @order.carted_weapons.each do |carted_weapon| %>
+  <h2><%= carted_weapon.weapon.name %></h2>
+  <h2>Quantity: <%= carted_weapon.quantity %></h2>
+  <h2>Product: <%= number_to_currency(carted_weapon.weapon.price) %></h2>
+<% end %>
+
+<h2>Subtotal: <%= number_to_currency(@order.subtotal) %></h2>
+<h2>Tax: <%= number_to_currency(@order.tax) %></h2>
+<h2>Total: <%= number_to_currency(@order.total) %></h2>

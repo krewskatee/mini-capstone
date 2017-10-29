@@ -1,0 +1,11 @@
+<center><h1>Shopping Cart</h1></center>
+
+<% @carted_weapons.each do |carted_weapon| %>
+    <h3>
+      <%= carted_weapon.weapon.name%>
+      <%= link_to "Remove", "/carted_weapons/#{carted_weapon.id}", method: :delete, class: 'btn btn-danger' %>
+    </h3>
+
+<% end %>
+
+<%= link_to "Buy Now!", "/orders", method: :post, class: 'btn btn-success' %>

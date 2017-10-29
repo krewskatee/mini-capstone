@@ -1,0 +1,22 @@
+<h2>Weapon Listings</h2>
+
+
+
+<% @weapons.each do |weapon| %>
+  <div class="col-md-4 col-sm-6 product-index-single">
+    <div class="well">
+      <% weapon.images.each do |image| %>
+        <img src= "<%= image.image_url %>" alt="">
+      <% end %>
+      <h2>Name:</h2> <h2><%= link_to weapon.name, "/weapons/#{weapon.id}" %></h2>
+      <h3>Price:</h3> <%= number_to_currency(weapon.price) %>
+      <h3>Description:</h3> <%= weapon.description %>
+      <% if weapon.stock == true %>
+        <h3>In Stock</h3>
+      <% else %>
+        <h3 class="red-price">Out of Stock</h3>
+      <% end %>
+      <br /><br /></br />
+    </div>
+  </div>
+<% end %>

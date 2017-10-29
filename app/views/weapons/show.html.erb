@@ -1,0 +1,41 @@
+<h2>Weapon Info</h2>
+<% @weapon.images.each do |image| %>
+  <img src= "<%= image.image_url %>" alt="">
+<% end %>
+<h2>Name:</h2> <%= @weapon.name %>
+<h3>Description:</h3> <%= @weapon.description %>
+<h2>Price:</h2> <h3 class="<%= "red-price" if @weapon.discounted? %>"><%= number_to_currency(@weapon.price) %></h3>
+<h2>Tax Amount:</h2> <h3><%= number_to_currency(@weapon.tax) %></h3>
+<h2>Total Price:</h2> <h3><%= number_to_currency(@weapon.total) %></h3>
+
+<% if @weapon.discounted? %>
+  <h3>Discount Item</h3>
+<% else %>
+    <h3>Everyday Great Item</h3>
+<% end %>
+
+<h1>Categories</h1>
+<% @weapon.categories.each do |category| %>
+  <%= category.name %>
+  <br />
+<% end %>
+
+<h6>Supplier: <%= @weapon.supplier.name %></h6>
+
+
+<% if current_user && current_user.admin %>
+  <br /><br />
+  <%= link_to "Update Listing", "/weapons/#{ @weapon.id }/edit", class: "btn btn-primary" %>
+  <%= link_to "Delete Listing", "/weapons/#{ @weapon.id }", method: :delete, class: "btn btn-danger" %>
+  <br />
+<% end %>
+<%= form_tag "/carted_weapons", method: :post do %>
+  <input type="hidden" name="weapon_id" value="<%= @weapon.id %>">
+  <div>
+    Quantity:<input type="text" name="quantity" class="form-control">
+  </div>
+  <br />
+  <div>
+    <button type="submit" class="btn btn-primary">Add To Cart</button>
+  </div>
+<% end %>

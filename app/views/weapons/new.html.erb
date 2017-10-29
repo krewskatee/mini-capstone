@@ -1,0 +1,38 @@
+<h1 align="center">Create a Listing</h1>
+<% if @weapon.errors.any? %>
+  <div id="error_explination">
+    <h2><%= pluralize(@product.errors.count, "error")%> prohibited this product from being saved:</h2>
+
+    <ul>
+      <% @product.errors.full_messages.each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<div class="container">
+  <%= form_tag "/weapons/create", method: :post do %>
+    <div>
+      <label for="Name">Name:</label> <input type="text" name="name" class="form-control" value = "<%= @weapon.name %>">
+    </div>
+    <div>
+      <label for="Price">Price:</label> <input type="text" name="price" class="form-control" value = "<%= @weapon.price %>">
+    </div>
+    <div>
+      <label for="Image_url">Image_url:</label> <input type="image_url" name="image_url" class="form-control" value = "<%= @weapon.name %>">
+    </div>
+    <div>
+      <label for="Description">Description:</label> <textarea id="desc" type="text" name="description" class="form-control" value = "<%= @weapon.name %>"></textarea>
+    </div>
+    <br />
+    <div>
+      <select name="supplier_id">
+        <% @suppliers.each do |supplier| %>
+          <option value="<%= supplier.id %>" <%= 'selected="selected"' if supplier.id == @weapon.supplier_id %>><%= supplier.name %></option>
+        <% end %>
+      </select>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Add Weapon</button>
+  <% end %>
+</div>
